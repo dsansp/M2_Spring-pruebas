@@ -7,7 +7,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -25,21 +27,22 @@ public class M2TestingDavidSansApplication implements CommandLineRunner {
 		System.out.println("Bienvenidos a la APP: ");
 		System.out.println("0- Salir: ");
 		System.out.println("1- Crear: ");
-		System.out.println("2- Ver todos: ");
+		System.out.println("2- Modificar por Id: ");
 		System.out.println("3- Buscar: ");
-		System.out.println("4- Modificar por Id: ");
-		System.out.println("5- Borrar por Id: ");
-		System.out.println("6- Borrar todos los registros: ");
-		System.out.println("7- Buscar por fabricante: ");
-		System.out.println("8- Buscar por precio menor que: ");
+		System.out.println("4- Borrar por Id: ");
+		System.out.println("5- Borrar todos los registros: ");
+
 
 
 	}
 public void subMenuBuscar() {
 	System.out.println("0- Volver atrás ");
-	System.out.println("1- Buscar por Id: ");
-	System.out.println("2- Buscar por fabricante: ");
-	System.out.println("3- Buscar por precio menor que: ");
+	System.out.println("1- Ver Todos: ");
+	System.out.println("2- Buscar por Id: ");
+	System.out.println("3- Buscar por fabricante: ");
+	System.out.println("4- Buscar por precio menor que: ");
+	System.out.println("5- Buscar por Megapixels y por memoria Ram: ");
+	System.out.println("5- Buscar por el Modelo: ");
 }
 
 
@@ -80,7 +83,38 @@ public void subMenuBuscar() {
 					System.out.println("Smartphone creado correctamente");
 
 				}else if (opcion == 2) {
+					System.out.println("Por favor, introduzca el id del Smartphone que desea modificar");
+					Long id = scanner.nextLong();
+					scanner.nextLine();
+					Optional<SmartPhones> smartPhonesOptional = repository.findById(id);
+					if (smartPhonesOptional.isEmpty()){
+						System.out.println("No existe el Smartphone solicitado");
 
+					}
+					SmartPhones smartp=smartPhonesOptional.get();
+					System.out.println("Introduce el fabricante (Actual "+ smartp.getManufacturer()+ ") ");
+					String manufacturer = scanner.nextLine();
+					smartp.setManufacturer(manufacturer);
+					System.out.println("Introduce el modelo(Actual "+ smartp.getModel()+ ") ");
+					String model = scanner.nextLine();
+					smartp.setModel(model);
+					System.out.println("Introduce la cantidad de Megapixels (Actual "+ smartp.getMpixel()+ ") ");
+					Integer mPixel = scanner.nextInt();
+					scanner.nextLine();
+					smartp.setMpixel(mPixel);
+					System.out.println("Introduce la cantidad de memoria RAM (Actual "+ smartp.getRam()+") ");
+					Integer ram = scanner.nextInt();
+					scanner.nextLine();
+					smartp.setRam(ram);
+					System.out.println("Introduce el precio (Actual "+ smartp.getPrice()+" ) ");
+					Double precio = scanner.nextDouble();
+					scanner.nextLine();
+					smartp.setPrice(precio);
+					System.out.println("¿El dispositivo dispone de Huella inteligente? (Actual "+ smartp.getHuella() +") ");
+					Boolean huella= scanner.nextBoolean();
+					smartp.setHuella(huella);
+					repository.save(smartp);
+					System.out.println(" Smartphone actualizado correctamente!");
 
 				}
 				else if (opcion == 3) {
@@ -95,10 +129,64 @@ public void subMenuBuscar() {
 							System.out.println("volver al menu principal");
 							break;
 						} else if (subOpcion == 1) {
+							System.out.println("Mostrar todos: ");
+						List<SmartPhones> telefono = repository.findAll();
+							if (telefono.isEmpty()) {
+								System.out.println("No hay Smartphones disponibles.");
+							} else {
+								System.out.println(telefono);
+							}
+
+
 						}
 						else if (subOpcion == 2) {
+							System.out.println("Introduzca la Id a buscar: ");
+							Long id = scanner.nextLong();
+							Optional<SmartPhones> smartPhonesOptional =repository.findById(id);
+							if (smartPhonesOptional.isPresent()) {
+							SmartPhones phones = smartPhonesOptional.get();
+								System.out.println(phones);
+							}else {
+								System.out.println("No existe el smartphone seleccionado");
+							}
 						}
 						else if (subOpcion == 3) {
+							System.out.println("Introduce un fabricante a buscar: ");
+							String manufacturer = scanner.nextLine();
+
+							for (SmartPhones phone : repository.findByManufacturerIgnoreCase(manufacturer))
+								System.out.println(phone);
+
+
+						}
+						else if (subOpcion == 4) {
+							System.out.println("Introduzca el precio de filtrado: ");
+							Double price = scanner.nextDouble();
+							scanner.next();
+
+							for (SmartPhones phone : repository.findByPriceLessThan(price))
+								System.out.println(phone);
+
+						}
+						else if (subOpcion == 5) {
+							System.out.println("Introduzca los megapixels a buscar: ");
+							Integer pixel = scanner.nextInt();
+							scanner.next();
+							System.out.println("Introduzca la cantidad de memoria Ram a buscar: ");
+							Integer ram = scanner.nextInt();
+							scanner.next();
+
+							for (SmartPhones phone : repository.findBymPixelAndRam(pixel,ram))
+								System.out.println(phone);
+
+						}
+						else if (subOpcion == 6) {
+							System.out.println("Introduzca el modelo a buscar: ");
+							String model = scanner.next();
+
+							for (SmartPhones phone : repository.findByModelIgnoreCase(model))
+								System.out.println(phone);
+
 						}
 					}
 				}
