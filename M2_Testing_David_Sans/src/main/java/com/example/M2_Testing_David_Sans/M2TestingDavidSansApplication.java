@@ -26,7 +26,7 @@ public class M2TestingDavidSansApplication implements CommandLineRunner {
 		System.out.println("0- Salir: ");
 		System.out.println("1- Crear: ");
 		System.out.println("2- Ver todos: ");
-		System.out.println("3- Buscar por Id: ");
+		System.out.println("3- Buscar: ");
 		System.out.println("4- Modificar por Id: ");
 		System.out.println("5- Borrar por Id: ");
 		System.out.println("6- Borrar todos los registros: ");
@@ -35,6 +35,12 @@ public class M2TestingDavidSansApplication implements CommandLineRunner {
 
 
 	}
+public void subMenuBuscar() {
+	System.out.println("0- Volver atrás ");
+	System.out.println("1- Buscar por Id: ");
+	System.out.println("2- Buscar por fabricante: ");
+	System.out.println("3- Buscar por precio menor que: ");
+}
 
 
 	@Override
@@ -78,8 +84,23 @@ public class M2TestingDavidSansApplication implements CommandLineRunner {
 
 				}
 				else if (opcion == 3) {
+					System.out.println("ha elegido la opción buscar: ");
 
-
+					while (true) {
+						scanner = new Scanner(System.in);
+						int subOpcion = scanner.nextInt();
+						scanner.nextLine();
+						subMenuBuscar();
+						if (subOpcion == 0) {
+							System.out.println("volver al menu principal");
+							break;
+						} else if (subOpcion == 1) {
+						}
+						else if (subOpcion == 2) {
+						}
+						else if (subOpcion == 3) {
+						}
+					}
 				}
 				else if (opcion == 4) {
 
