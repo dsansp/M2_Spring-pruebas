@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface SmartPhonesRepository extends JpaRepository<SmartPhones, Long>{
-    List<SmartPhones> findByManufacturer(String manufacturer);
+    List<SmartPhones> findByManufacturerIgnoreCase(String manufacturer);
+    List<SmartPhones> findByPriceLessThan(Double price);
 }
