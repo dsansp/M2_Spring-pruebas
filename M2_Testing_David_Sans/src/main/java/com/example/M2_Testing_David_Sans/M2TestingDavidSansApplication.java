@@ -1,12 +1,15 @@
 package com.example.M2_Testing_David_Sans;
 
+import com.example.M2_Testing_David_Sans.repositories.SmartPhonesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class M2TestingDavidSansApplication implements CommandLineRunner {
-
+	@Autowired
+	SmartPhonesRepository repository;
 	public static void main(String[] args) {
 		SpringApplication.run(M2TestingDavidSansApplication.class, args);
 
