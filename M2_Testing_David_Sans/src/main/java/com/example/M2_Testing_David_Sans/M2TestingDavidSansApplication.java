@@ -50,7 +50,28 @@ public class M2TestingDavidSansApplication implements CommandLineRunner {
 					System.out.println("Hasta la próxima");
 					break;
 				} else if (opcion == 1) {
+					System.out.println("Introduce el fabricante");
+					String manufacturer = scanner.nextLine();
+					System.out.println("Introduce el modelo");
+					String model = scanner.nextLine();
+					System.out.println("Introduce la cantidad de Megapixeles");
+					Integer mPixel = scanner.nextInt();
+					scanner.nextLine();
+					System.out.println("Introduce la cantidad de memoria RAM");
+					Integer ram = scanner.nextInt();
+					scanner.nextLine();
+					System.out.println("Introduce el precio");
+					Double precio = scanner.nextDouble();
+					scanner.nextLine();
+					System.out.println("¿El dispositivo dispone de Huella inteligente?");
+					Boolean huella= scanner.nextBoolean();
 
+					// 2. Crear el objeto
+					SmartPhones telefono = new SmartPhones(null, manufacturer, model, precio, mPixel, huella,ram);
+
+					// 3. Guardar el objeto  en base de datos
+					repository.save(telefono);
+					System.out.println("Smartphone creado correctamente");
 
 				}else if (opcion == 2) {
 
@@ -75,8 +96,8 @@ public class M2TestingDavidSansApplication implements CommandLineRunner {
 				else if (opcion == 8) {
 					System.out.println("Ha escogido buscar todos por fabricante:");
 					String manufact = scanner.nextLine();
-					List<SmartPhones> phones = repository.findByManufacturerIgnoreCase(manufact);
-					for (SmartPhones smartPhone : phones) {
+				;
+					for (SmartPhones smartPhone : repository.findByManufacturerIgnoreCase(manufact)) {
 						System.out.println(smartPhone);
 
 

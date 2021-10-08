@@ -10,4 +10,6 @@ import java.util.List;
 public interface SmartPhonesRepository extends JpaRepository<SmartPhones, Long>{
     List<SmartPhones> findByManufacturerIgnoreCase(String manufacturer);
     List<SmartPhones> findByPriceLessThan(Double price);
+    List<SmartPhones> findBymPixelAndRam(Integer mPixels, Integer Ram);
+    List<SmartPhones> findByModelIgnoreCase(String model);
 }
