@@ -14,7 +14,7 @@ private Long id;
 private String manufacturer;
 private String model;
 private Double price;
-private Integer mpixel;
+private Integer pixel;
 private Boolean huella;
 private Integer ram;
 
@@ -22,12 +22,12 @@ private Integer ram;
     public SmartPhones() {
     }
 
-    public SmartPhones(Long id, String manufacturer, String model, Double price, Integer mpixel, Boolean huella, Integer ram) {
+    public SmartPhones(Long id, String manufacturer, String model, Double price, Integer pixel, Boolean huella, Integer ram) {
         this.id = id;
         this.manufacturer = manufacturer;
         this.model = model;
         this.price = price;
-        this.mpixel = mpixel;
+        this.pixel = pixel;
         this.huella = huella;
         this.ram = ram;
     }
@@ -64,12 +64,12 @@ private Integer ram;
         this.price = price;
     }
 
-    public Integer getMpixel() {
-        return mpixel;
+    public Integer getPixel() {
+        return pixel;
     }
 
-    public void setMpixel(Integer mpixel) {
-        this.mpixel = mpixel;
+    public void setPixel(Integer pixel) {
+        this.pixel = pixel;
     }
 
     public Boolean getHuella() {
@@ -95,7 +95,7 @@ private Integer ram;
                 ", manufacturer='" + manufacturer + '\'' +
                 ", model='" + model + '\'' +
                 ", price=" + price +
-                ", mpixel=" + mpixel +
+                ", pixel=" + pixel +
                 ", huella=" + huella +
                 ", ram=" + ram +
                 '}';

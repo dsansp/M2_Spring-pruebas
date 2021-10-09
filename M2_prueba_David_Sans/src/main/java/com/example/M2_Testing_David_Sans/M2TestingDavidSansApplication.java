@@ -20,7 +20,7 @@ public class M2TestingDavidSansApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(M2TestingDavidSansApplication.class, args);
 
-
+		System.out.println("hola mundo");
 	}
 
 	public void menuShow() {
@@ -31,27 +31,29 @@ public class M2TestingDavidSansApplication implements CommandLineRunner {
 		System.out.println("3- Buscar: ");
 		System.out.println("4- Borrar por Id: ");
 		System.out.println("5- Borrar todos los registros: ");
-
+		System.out.println("6- Ver Todos: ");
+		System.out.println("7- Buscar por Id: ");
+		System.out.println("8- Buscar por fabricante: ");
+		System.out.println("9- Buscar por precio menor que: ");
+		System.out.println("10- Buscar por Megapixels y por memoria Ram: ");
+		System.out.println("11- Buscar por el Modelo: ");
+		System.out.println("12- Buscar hasta un precio determinado: ");
 
 
 	}
-public void subMenuBuscar() {
-	System.out.println("0- Volver atrás ");
-	System.out.println("1- Ver Todos: ");
-	System.out.println("2- Buscar por Id: ");
-	System.out.println("3- Buscar por fabricante: ");
-	System.out.println("4- Buscar por precio menor que: ");
-	System.out.println("5- Buscar por Megapixels y por memoria Ram: ");
-	System.out.println("5- Buscar por el Modelo: ");
-	System.out.println("6- Buscar hasta un precio determinado: ");
 
-}
+//public void subMenuBuscar() {
+//	System.out.println("0- Volver atrás ");
+
+
+//}
+
 
 
 	@Override
-	public void run(String... args) // throws Exception
+	public void run(String... args)  throws Exception
 	{
-		while (true) {
+	while (true) {
 			Scanner scanner = new Scanner(System.in);
 			menuShow();
 			try {
@@ -101,10 +103,10 @@ public void subMenuBuscar() {
 					System.out.println("Introduce el modelo(Actual "+ smartp.getModel()+ ") ");
 					String model = scanner.nextLine();
 					smartp.setModel(model);
-					System.out.println("Introduce la cantidad de Megapixels (Actual "+ smartp.getMpixel()+ ") ");
+					System.out.println("Introduce la cantidad de Megapixels (Actual "+ smartp.getPixel()+ ") ");
 					Integer mPixel = scanner.nextInt();
 					scanner.nextLine();
-					smartp.setMpixel(mPixel);
+					smartp.setPixel(mPixel);
 					System.out.println("Introduce la cantidad de memoria RAM (Actual "+ smartp.getRam()+") ");
 					Integer ram = scanner.nextInt();
 					scanner.nextLine();
@@ -120,18 +122,20 @@ public void subMenuBuscar() {
 					System.out.println(" Smartphone actualizado correctamente!");
 
 				}
-				else if (opcion == 3) {
-					System.out.println("ha elegido la opción buscar: ");
+				//else if (opcion == 3) {
+				//System.out.println("ha elegido la opción buscar: ");
 
-					while (true) {
-						scanner = new Scanner(System.in);
-						int subOpcion = scanner.nextInt();
-						scanner.nextLine();
-						subMenuBuscar();
-						if (subOpcion == 0) {
-							System.out.println("volver al menu principal");
-							break;
-						} else if (subOpcion == 1) {
+				//while (true) {
+					//	subMenuBuscar();
+				//	scanner = new Scanner(System.in);
+				//		int subOpcion = scanner.nextInt();
+				//		scanner.nextLine();
+
+				//		if (subOpcion == 0) {
+				//			System.out.println("volver al menu principal");
+				//			break;
+					//	}
+			else if (opcion == 6) {
 							System.out.println("Mostrar todos: ");
 							List<SmartPhones> telefono = repository.findAll();
 							if (telefono.isEmpty()) {
@@ -141,7 +145,7 @@ public void subMenuBuscar() {
 							}
 
 
-						} else if (subOpcion == 2) {
+						} else if (opcion == 7) {
 							System.out.println("Introduzca la Id a buscar: ");
 							Long id = scanner.nextLong();
 							Optional<SmartPhones> smartPhonesOptional = repository.findById(id);
@@ -151,7 +155,7 @@ public void subMenuBuscar() {
 							} else {
 								System.out.println("No existe el smartphone seleccionado");
 							}
-						} else if (subOpcion == 3) {
+						} else if (opcion == 8) {
 							System.out.println("Introduce un fabricante a buscar: ");
 							String manufacturer = scanner.nextLine();
 
@@ -159,7 +163,7 @@ public void subMenuBuscar() {
 								System.out.println(phone);
 
 
-						} else if (subOpcion == 4) {
+						} else if (opcion == 9) {
 							System.out.println("Introduzca el precio de filtrado: ");
 							Double price = scanner.nextDouble();
 							scanner.next();
@@ -167,7 +171,7 @@ public void subMenuBuscar() {
 							for (SmartPhones phone : repository.findByPriceLessThan(price))
 								System.out.println(phone);
 
-						} else if (subOpcion == 5) {
+						} else if (opcion == 10) {
 							System.out.println("Introduzca los megapixels a buscar: ");
 							Integer pixel = scanner.nextInt();
 							scanner.next();
@@ -178,14 +182,14 @@ public void subMenuBuscar() {
 							for (SmartPhones phone : repository.findBymPixelAndRam(pixel, ram))
 								System.out.println(phone);
 
-						} else if (subOpcion == 6) {
+						} else if (opcion == 11) {
 							System.out.println("Introduzca el modelo a buscar: ");
 							String model = scanner.next();
 
 							for (SmartPhones phone : repository.findByModelIgnoreCase(model))
 								System.out.println(phone);
 
-						} else if (subOpcion == 7) {
+						} else if (opcion == 12) {
 							System.out.println("Introduzca el precio hasta el que desea buscar: ");
 							Double preciotope = scanner.nextDouble();
 							List<SmartPhones> phones = repository.findByPriceLessThan(preciotope);
@@ -199,17 +203,16 @@ public void subMenuBuscar() {
 		//				} else if (opcion == 5) {
 
 
-			//			} else if (opcion == 7) {
+	//				} else if (opcion == 7) {
 
-
-			//			} else if (opcion == 8) {
-
-						}
-
-
-					}
+	//					} else if (opcion == 8) {
 
 				}
+
+
+	//				}
+
+	//		}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
